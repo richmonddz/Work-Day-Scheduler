@@ -9,22 +9,35 @@ saveBtn.on("click", function () {
   localStorage.setItem(time, todo);
 });
 function ColorCode() {
-  var hour = moment().hours();
+  var currHour = moment().hours();
 
-  $(".ToDo").each(function () {
+  $(".time-block").each(function () {
     var SetHour = parseInt($(this).attr("id"));
 
-    if (SetHour > hour) {
+    if (SetHour > currHour) {
       $(this).addClass("future");
       $(this).removeClass("present");
       $(this).removeClass("past");
-    } else if (SetHour === hour) {
-      $(this).addClass("present");
-      $(this).removeClass("past");
-      $(this).removeClass("future");
-    } else {
+    } else if (SetHour < currHour) {
       $(this).addClass("past");
+      $(this).removeClass("future");
+      $(this).removeClass("present");
+    } else {
+      $(this).removeClass("future");
+      $(this).removeClass("past");
+      $(this).addClass("present");
     }
   });
 }
+function RetToDo() {
+  $(".Time").each(function () {
+    var ToDoHr = $(this).text();
+    var FtToDo = localStorage.getItem(ToDoHr);
+    if (FtToDo !== null) {
+      $(this).siblings(".ToDo").val(FtToDo);
+    }
+  });
+}
+
+RetToDo();
 ColorCode();
