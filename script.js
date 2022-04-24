@@ -11,7 +11,7 @@ saveBtn.on("click", function () {
 function ColorCode() {
   var hour = moment().hours();
 
-  $(".time-block").each(function () {
+  $(".ToDo").each(function () {
     var SetHour = parseInt($(this).attr("id"));
 
     if (SetHour > hour) {
@@ -27,3 +27,4 @@ function ColorCode() {
     }
   });
 }
+ColorCode();
